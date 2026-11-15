@@ -224,8 +224,6 @@ body { background: #f5f6f7; color: #202124; }
 .challenge-prompt div span { margin-top: 3px; color: #e8f0fe; font-size: 11px; }
 .challenge-close { margin-left: auto; width: 30px; height: 30px; border: 1px solid #ffffff88; background: transparent; color: #fff; font: 22px/1 var(--display); cursor: pointer; }
 .challenge-close:hover { background: #ffffff22; }
-.game-picker { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 20px; border-bottom: 1px solid #e8eaed; color: #5f6368; font: 9px var(--mono); }
-.game-picker select { min-width: 220px; max-width: 70%; padding: 7px 28px 7px 9px; border: 1px solid #c5c9ce; border-radius: 2px; background: #fff; color: #202124; font: 11px var(--display); cursor: pointer; }
 .sequence-game { border: 1px solid #dadce0; background: #fafafa; padding: 12px; }
 .sequence-heading, .sequence-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .sequence-status, .sequence-count, .sequence-progress, .sequence-replay { font: 9px var(--mono); color: #5f6368; }
@@ -284,8 +282,6 @@ body { background: #f5f6f7; color: #202124; }
   .captcha-main { margin-top: 28px; }
   .challenge-dialog { max-height: calc(100vh - 20px); }
   .game-layout { grid-template-columns: 1fr; padding: 12px; }
-  .game-picker { align-items: flex-start; flex-direction: column; }
-  .game-picker select { width: 100%; max-width: none; }
   .sequence-key { min-height: 78px; }
   .offer-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
   .offer-ribbon, .offer-art, .offer-footer { grid-column: 1 / -1; }

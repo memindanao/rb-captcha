@@ -99,7 +99,7 @@ async function handleApi(request, response, url) {
   sendJson(response, 404, { error: "API route not found." });
 }
 
-async function serveStatic(response, url) {
+async function serveStatic(request, response, url) {
   let pathname;
   try {
     pathname = decodeURIComponent(url.pathname);
@@ -139,7 +139,7 @@ const server = createServer(async (request, response) => {
     response.writeHead(405, { allow: "GET, HEAD" }).end("Method not allowed");
     return;
   }
-  await serveStatic(response, url);
+  await serveStatic(request, response, url);
 });
 
 server.listen(port, host, () => {
