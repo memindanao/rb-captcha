@@ -16,9 +16,6 @@
   let selectedGameId = "";
   let cleanupGame = null;
   let toastTimer;
-  let nagTimer;
-  let dismissedPaymentOffer = false;
-  let activeOfferIsPayment = false;
 
   const roundLabel = document.querySelector("#round-label");
   const progress = document.querySelector(".progress-track");
@@ -48,7 +45,6 @@
 
   function completeRun(skipped) {
     if (cleanupGame) cleanupGame();
-    window.clearInterval(nagTimer);
     captchaToggle.classList.remove("is-active");
     captchaToggle.classList.add("is-verified");
     captchaToggle.setAttribute("aria-pressed", "true");
@@ -108,24 +104,17 @@
     if (cleanupGame) cleanupGame();
     round = 0;
     mistakes = 0;
-    window.clearInterval(nagTimer);
     if (!challengeDialog.open) challengeDialog.showModal();
     captchaToggle.classList.remove("is-verified");
     captchaToggle.classList.add("is-active");
     captchaToggle.setAttribute("aria-pressed", "true");
     checkboxLabel.textContent = "Verifying...";
     verificationStatus.textContent = "Challenge in progress. This is taking longer than it should.";
-    nagTimer = window.setInterval(() => {
-      if (challengeDialog.open && !dialog.open) {
-        openOffer("STILL THINKING?", "Are you sure you don't want to pay? Skip the remaining challenges for $0.99.");
-      }
-    }, 30000);
     updateProgress();
     renderRound();
   }
 
   function openOffer(eyebrow, copy) {
-    activeOfferIsPayment = eyebrow !== "A FAIR QUESTION";
     dialog.classList.toggle("is-quick-question", eyebrow === "QUICK QUESTION");
     document.querySelector("#dialog-eyebrow").textContent = eyebrow;
     document.querySelector("#dialog-copy").textContent = copy;
@@ -139,7 +128,6 @@
   }
 
   function dismissOffer() {
-    dismissedPaymentOffer = activeOfferIsPayment;
     dialog.close();
   }
 
@@ -168,7 +156,6 @@
   document.querySelector("#keep-playing").addEventListener("click", dismissOffer);
   document.querySelector("#challenge-close").addEventListener("click", () => challengeDialog.close());
   challengeDialog.addEventListener("close", () => {
-    window.clearInterval(nagTimer);
     if (captchaToggle.classList.contains("is-verified")) return;
     captchaToggle.classList.remove("is-active");
     captchaToggle.setAttribute("aria-pressed", "false");
@@ -191,24 +178,11 @@
     if (challengeDialog.open && games.length) renderRound();
   });
   dialog.addEventListener("close", () => {
-    const shouldReopen = dismissedPaymentOffer && activeOfferIsPayment;
-    dismissedPaymentOffer = false;
-    activeOfferIsPayment = false;
     dialog.classList.remove("is-quick-question");
     document.querySelector("#confirm-buy").hidden = false;
     document.querySelector("#confirm-buy").disabled = false;
     document.querySelector("#confirm-buy").innerHTML = "<span>PAY &amp; SKIP</span><span>$0.99 ↗</span>";
     document.querySelector("#keep-playing").textContent = "KEEP PLAYING";
-    if (shouldReopen && Math.random() < 0.2) {
-      window.setTimeout(() => {
-        if (challengeDialog.open && !dialog.open && !captchaToggle.classList.contains("is-verified")) {
-          openOffer("ARE YOU SURE?", "Are you sure you don't want to pay? Skip the remaining challenges for $0.99.");
-        }
-      }, 250);
-    }
-  });
-  dialog.addEventListener("cancel", () => {
-    dismissedPaymentOffer = activeOfferIsPayment;
   });
 
   if (!games.length) {

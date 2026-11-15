@@ -126,15 +126,16 @@ h1 em, .offer-panel h2 em, .modal h2 em { color: var(--green); font-style: norma
 .keep-playing { display: block; margin: 13px auto 0; padding: 7px 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 11px; cursor: pointer; }
 .keep-playing:hover { color: var(--ink); border-color: var(--ink); }
 .modal-disclosure { margin: 19px 0 0; color: #85897f; font-size: 8px; text-align: center; }
-.modal.is-quick-question { border: 4px solid #ff00c8; background: #00f5ff; color: #171126; box-shadow: 12px 12px 0 #c6ff00, 0 0 28px #ff00c8; }
-.modal.is-quick-question::backdrop { background: #6a00ffb8; backdrop-filter: blur(3px) saturate(1.7); }
-.modal.is-quick-question .modal-stamp { border: 2px solid #ff00c8; background: #c6ff00; color: #ff00c8; font-weight: 700; }
-.modal.is-quick-question .eyebrow { color: #ff00a8; font-weight: 700; }
+.modal.is-quick-question { border: 5px solid #ff00c8; background: repeating-linear-gradient(135deg, #00f5ff 0 18px, #b8ff00 18px 36px, #fff600 36px 54px); color: #171126; box-shadow: 12px 12px 0 #ff00c8, 0 0 36px #00f5ff; animation: scam-glow .8s steps(2, end) infinite; }
+.modal.is-quick-question::before { content: "!!! LIMITED TIME - ACT NOW - !!!"; display: block; margin: -30px -30px 20px; padding: 12px 30px; background: #ff00c8; color: #fff600; font: 700 12px var(--mono); text-align: center; text-shadow: 2px 2px #6a00ff; animation: scam-banner .55s steps(2, end) infinite; }
+.modal.is-quick-question::backdrop { background: #6a00ffd9; backdrop-filter: blur(3px) saturate(2); }
+.modal.is-quick-question .modal-stamp { border: 3px dashed #ff00c8; background: #fff600; color: #6a00ff; font-weight: 700; }
+.modal.is-quick-question .eyebrow { color: #6a00ff; font-weight: 700; text-shadow: 1px 1px #fff; }
 .modal.is-quick-question .modal-copy { color: #171126; font-weight: 700; }
-.modal.is-quick-question .modal-close { color: #ff00a8; font-weight: 700; }
-.modal.is-quick-question .modal-buy { border: 2px solid #171126; background: #c6ff00; color: #ff00a8; box-shadow: 4px 4px 0 #ff00c8; font-weight: 700; }
-.modal.is-quick-question .modal-buy:hover { background: #ff00c8; color: #fff; }
-.modal.is-quick-question .keep-playing { border-color: #ff00a8; color: #171126; font-weight: 700; }
+.modal.is-quick-question .modal-close { color: #ff00a8; font-weight: 700; background: #fff600; }
+.modal.is-quick-question .modal-buy { border: 3px solid #171126; background: #ff00c8; color: #fff600; box-shadow: 6px 6px 0 #00f5ff; font-weight: 700; text-shadow: 1px 1px #6a00ff; animation: scam-button .7s steps(2, end) infinite; }
+.modal.is-quick-question .modal-buy:hover { background: #fff600; color: #ff00c8; }
+.modal.is-quick-question .keep-playing { border: 2px solid #6a00ff; padding: 7px 10px; background: #00f5ff; color: #6a00ff; font-weight: 700; }
 .modal.is-quick-question .modal-disclosure { color: #39305a; }
 .toast { position: fixed; bottom: 22px; left: 50%; max-width: calc(100vw - 32px); padding: 12px 17px; background: var(--ink); color: white; font: 11px var(--mono); opacity: 0; pointer-events: none; transform: translate(-50%, 10px); transition: opacity .2s, transform .2s; z-index: 5; text-align: center; }
 .toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
@@ -332,6 +333,9 @@ body { background: #f5f6f7; color: #202124; }
 
 @keyframes check-in { from { transform: rotate(45deg) scale(.5); } to { transform: rotate(45deg) scale(1); } }
 @keyframes lebron-hop { 0% { transform: translateY(0); } 42% { transform: translateY(-53px); } 100% { transform: translateY(0); } }
+@keyframes scam-glow { 0%, 100% { border-color: #ff00c8; box-shadow: 12px 12px 0 #fff600, 0 0 36px #ff00c8; } 50% { border-color: #00f5ff; box-shadow: 12px 12px 0 #ff00c8, 0 0 44px #00f5ff; } }
+@keyframes scam-banner { 0%, 100% { background: #ff00c8; color: #fff600; } 50% { background: #fff600; color: #6a00ff; } }
+@keyframes scam-button { 0%, 100% { background: #ff00c8; color: #fff600; } 50% { background: #6a00ff; color: #00f5ff; } }
 
 @media (max-width: 650px) {
   .captcha-main { margin-top: 28px; }
