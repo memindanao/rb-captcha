@@ -40,17 +40,16 @@
           <div class="verified-note" id="verification-status" aria-live="polite"></div>
           <dialog class="challenge-dialog" id="challenge-dialog" aria-label="CAPTCHA challenge">
             <section class="challenge-area" id="challenge-area">
-            <div class="challenge-prompt"><span class="prompt-mark" aria-hidden="true">▦</span><div><strong>Complete the challenge</strong><span>One small test. Repeated several times.</span></div><button class="challenge-close" id="challenge-close" type="button" aria-label="Close challenge">×</button></div>
+            <div class="challenge-prompt"><span class="prompt-mark" aria-hidden="true">▦</span><div><strong>Complete the challenge</strong></div><button class="challenge-close" id="challenge-close" type="button" aria-label="Close challenge">×</button></div>
             <div class="game-layout" aria-label="Human verification game">
               <div class="play-column">
                 <div class="progress-row">
-                  <div class="progress-copy"><span class="eyebrow">YOUR LITTLE JOURNEY</span><span id="round-label">ROUND 01 / 03</span></div>
+                  <div class="progress-copy"><span id="round-label">ROUND 01 / 03</span></div>
                   <div class="progress-track" role="progressbar" aria-label="Challenge progress" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span id="progress-fill"></span></div>
                 </div>
 
                 <article class="game-card">
                   <div class="card-topline">
-                    <span class="challenge-label"><span class="spark" aria-hidden="true">✳</span> HUMAN CHECK <span id="challenge-number">001</span></span>
                     <span class="game-kind" id="game-kind">PRECISION GAME</span>
                   </div>
                   <div class="challenge-heading">
@@ -63,12 +62,11 @@
                   <p class="game-instruction" id="game-description">A simple little click. It only moves when you get close. Probably.</p>
                   <div class="game-host" id="game-host" aria-live="polite"></div>
                   <div class="card-footer">
-                    <span class="failure-copy"><span class="failure-icon" aria-hidden="true">!</span> <span id="failure-count">Zero mistakes. For now.</span></span>
+                    <span class="failure-copy"><span class="failure-icon" aria-hidden="true">!</span> <span id="failure-count">No mistakes</span></span>
                     <span class="game-counter" id="game-counter">1 GAME TYPE IN ROTATION</span>
                   </div>
                 </article>
 
-                <div class="under-note"><span class="note-star" aria-hidden="true">✳</span><span>Doing great? That sounds like something a robot would say.</span></div>
               </div>
 
               <aside class="offer-panel" aria-labelledby="offer-title">
@@ -77,12 +75,10 @@
                   <div class="coin coin-back">$</div><div class="coin coin-front">$</div>
                   <div class="offer-scribble">skip<br>the<br>nonsense</div>
                 </div>
-                <p class="eyebrow">HUMANITY, UNLOCKED</p>
                 <h2 id="offer-title">You could be done <em>right now.</em></h2>
                 <p class="offer-copy">Skip all remaining challenges and return to whatever you were doing.</p>
                 <button class="buy-button" id="buy-button" type="button"><span>SKIP EVERYTHING</span><span>$0.99 <span aria-hidden="true">↗</span></span></button>
                 <div class="demo-disclosure"><span class="demo-lock" aria-hidden="true">▣</span><span>SECURE CHECKOUT<br><strong>Payment handled by Stripe.</strong></span></div>
-                <div class="offer-footer"><span>Limited time offer*</span><span>*not actually limited</span></div>
               </aside>
             </div>
             </div>
@@ -99,11 +95,10 @@
       <button class="modal-close icon-button" id="dialog-close" type="button" aria-label="Close">×</button>
       <div class="modal-stamp" aria-hidden="true">SECURE<br>CHECKOUT</div>
       <p class="eyebrow" id="dialog-eyebrow">A MOMENT OF WEAKNESS?</p>
-      <h2 id="dialog-title">Skip the struggle.<br><em>Keep your dignity.</em></h2>
-      <p class="modal-copy" id="dialog-copy">Pay $0.99 through Stripe Checkout to skip the remaining challenges. Payment is confirmed by the server before verification is granted.</p>
+      <p class="modal-copy" id="dialog-copy">Pay $0.99 through Stripe Checkout to skip the remaining challenges.</p>
       <button class="buy-button modal-buy" id="confirm-buy" type="button"><span>PAY &amp; SKIP</span><span>$0.99 ↗</span></button>
-      <button class="keep-playing" id="keep-playing" type="button">No thanks, I enjoy tiny problems</button>
-      <p class="modal-disclosure">SECURE STRIPE CHECKOUT. Test mode is enabled by default; card details never touch this page.</p>
+      <button class="keep-playing" id="keep-playing" type="button">KEEP PLAYING</button>
+      <p class="modal-disclosure">Payments processed securely by Stripe.</p>
     </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <noscript>This very silly CAPTCHA needs JavaScript to make its games move.</noscript>

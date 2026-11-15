@@ -14,7 +14,7 @@
 
     element.innerHTML = `
       <div class="dino-game">
-        <div class="dino-hud"><span id="dino-status">OBSTACLE DETECTED. YOUR INPUT WILL BE DELAYED.</span><span id="dino-score">0 / ${requiredDodges}</span></div>
+        <div class="dino-hud"><span id="dino-status">CACTUS INCOMING. GET READY.</span><span id="dino-score">0 / ${requiredDodges}</span></div>
         <div class="dino-track" role="img" aria-label="Dinosaur runner game">
           <div class="dino-skyline" aria-hidden="true"></div>
           <div class="dino-sprite" id="dino-sprite" aria-hidden="true">🦖</div>
@@ -22,7 +22,7 @@
         </div>
         <div class="dino-controls"><button class="dino-jump" id="dino-jump" type="button">JUMP <span aria-hidden="true">↑</span></button><span class="dino-key-hint">OR PRESS SPACE</span></div>
       </div>
-      <div class="game-hint"><span class="hint-mark" aria-hidden="true">↳</span><span>Dodge ${requiredDodges} cacti. Jump inputs arrive after a random delay. No, we won't tell you how long.</span></div>
+      <div class="game-hint"><span class="hint-mark" aria-hidden="true">↳</span><span>Dodge ${requiredDodges} cacti. Jump as each one approaches.</span></div>
     `;
 
     const track = element.querySelector(".dino-track");
@@ -47,14 +47,14 @@
       if (finished || inputPending) return;
       inputPending = true;
       jumpButton.disabled = true;
-      status.textContent = "JUMP REQUEST RECEIVED. PROCESSING...";
+      status.textContent = "JUMP!";
       const inputDelay = Math.min(maxInputDelayMs, 100 + Math.random() * (maxInputDelayMs - 100));
       schedule(() => {
         inputPending = false;
         jumpButton.disabled = false;
         jumpUntil = performance.now() + jumpDuration;
         dino.classList.add("is-airborne");
-        status.textContent = "INPUT ARRIVED. GREAT TIMING?";
+        status.textContent = "NICE HOP.";
         schedule(() => dino.classList.remove("is-airborne"), jumpDuration);
       }, inputDelay);
     }
@@ -73,7 +73,7 @@
       mistakes += 1;
       score = 0;
       scoreDisplay.textContent = `0 / ${requiredDodges}`;
-      status.textContent = "BONK. THE INPUT WAS DELAYED. TRY AGAIN.";
+      status.textContent = "MISSED THE JUMP. TRY AGAIN.";
       obstacles.forEach(({ element: item }) => item.remove());
       obstacles.length = 0;
       onFail({ mistakes, gameId: "dino-delay" });
@@ -155,7 +155,7 @@
     id: "dino-delay",
     type: "runner",
     title: "Help the dinosaur jump.",
-    description: "Dodge the cacti. Your jump input will arrive whenever it feels like it.",
+    description: "Dodge the cacti. Jump at the right moment.",
     mount
   });
 })();

@@ -24,7 +24,6 @@
   const title = document.querySelector("#game-title");
   const description = document.querySelector("#game-description");
   const gameKind = document.querySelector("#game-kind");
-  const challengeNumber = document.querySelector("#challenge-number");
   const challengeStep = document.querySelector("#challenge-step");
   const failureCount = document.querySelector("#failure-count");
   const counter = document.querySelector("#game-counter");
@@ -41,9 +40,8 @@
     progress.setAttribute("aria-valuenow", String(round));
     progressFill.style.width = `${percent}%`;
     roundLabel.textContent = `ROUND ${String(Math.min(round + 1, totalRounds)).padStart(2, "0")} / ${String(totalRounds).padStart(2, "0")}`;
-    challengeNumber.textContent = String(round + 1).padStart(3, "0");
     challengeStep.textContent = String(round + 1).padStart(2, "0");
-    failureCount.textContent = mistakes === 0 ? "Zero mistakes. For now." : `${mistakes} ${mistakes === 1 ? "mistake" : "mistakes"}. The system remembers.`;
+    failureCount.textContent = mistakes === 0 ? "No mistakes" : `${mistakes} ${mistakes === 1 ? "mistake" : "mistakes"}`;
   }
 
   function completeRun(skipped) {
@@ -92,7 +90,7 @@
       onComplete: advance,
       onFail: ({ mistakes: gameMistakes }) => {
         mistakes += 1;
-        failureCount.textContent = `${mistakes} ${mistakes === 1 ? "mistake" : "mistakes"}. The system remembers.`;
+        failureCount.textContent = `${mistakes} ${mistakes === 1 ? "mistake" : "mistakes"}`;
         if (mistakes % 3 === 0) {
           openOffer("QUICK QUESTION", "That's three mistakes. Are you sure you don't want to pay? You could skip every remaining challenge for $0.99.");
         }
@@ -133,7 +131,7 @@
   }
 
   document.querySelector("#buy-button").addEventListener("click", () => {
-    openOffer("SECURE STRIPE CHECKOUT", "Continue to Stripe's hosted checkout to pay $0.99 and skip the remaining challenges. This page never handles card details.");
+    openOffer("SECURE STRIPE CHECKOUT", "Continue to Stripe Checkout to pay $0.99 and skip the remaining challenges.");
   });
   async function startCheckout() {
     const checkoutButton = document.querySelector("#confirm-buy");
@@ -166,10 +164,9 @@
     if (cleanupGame) cleanupGame();
   });
   function showHelp() {
-    openOffer("A FAIR QUESTION", "This CAPTCHA demo uses hosted Stripe Checkout. Test mode is enabled by default, and this page never receives card details.");
-    document.querySelector("#dialog-title").innerHTML = "Because the internet<br><em>is full of robots.</em>";
+    openOffer("A FAIR QUESTION", "This CAPTCHA uses hosted Stripe Checkout for the optional skip.");
     document.querySelector("#confirm-buy").hidden = true;
-    document.querySelector("#keep-playing").textContent = "Okay, let's play";
+    document.querySelector("#keep-playing").textContent = "KEEP PLAYING";
   }
   document.querySelector("#help-button").addEventListener("click", showHelp);
   document.querySelector("#help-link").addEventListener("click", showHelp);
@@ -183,8 +180,7 @@
     document.querySelector("#confirm-buy").hidden = false;
     document.querySelector("#confirm-buy").disabled = false;
     document.querySelector("#confirm-buy").innerHTML = "<span>PAY &amp; SKIP</span><span>$0.99 ↗</span>";
-    document.querySelector("#dialog-title").innerHTML = "Skip the struggle.<br><em>Keep your dignity.</em>";
-    document.querySelector("#keep-playing").textContent = "No thanks, I enjoy tiny problems";
+    document.querySelector("#keep-playing").textContent = "KEEP PLAYING";
     if (shouldReopen && Math.random() < 0.2) {
       window.setTimeout(() => {
         if (challengeDialog.open && !dialog.open && !captchaToggle.classList.contains("is-verified")) {
