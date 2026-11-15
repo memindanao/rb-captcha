@@ -356,4 +356,22 @@ body { background: #f5f6f7; color: #202124; }
   .coin-front { left: calc(50% - 4px); top: 7px; }
   .offer-scribble { right: 18%; }
   .site-footer { margin-top: 17px; }
-}
+}/* Append to styles.css in shebss/rb-captcha — matches its existing palette.
+   The JS sets panel classes; these are the only new styles needed. */
+
+.reaction-game { border: 1px solid #dadce0; background: #fafafa; padding: 12px; }
+.reaction-hud { min-height: 19px; display: flex; justify-content: space-between; gap: 8px; align-items: center; color: #5f6368; font: 8px var(--mono); }
+.reaction-panel { display: block; width: 100%; min-height: 190px; margin-top: 8px; padding: 18px; border: 1px solid #dadce0; cursor: pointer; text-align: center; transition: background-color .12s ease; }
+.reaction-big { display: block; font: 600 26px/1.1 var(--display); letter-spacing: 0; }
+.reaction-sub { display: block; margin-top: 8px; font-size: 12px; line-height: 1.45; opacity: .85; }
+.reaction-ms { display: block; margin-top: 10px; font: 11px var(--mono); }
+.reaction-window { margin-top: 10px; color: #80868b; font: 8px var(--mono); text-align: center; }
+
+/* States — JS swaps these classes on the panel */
+.reaction-panel.is-waiting { background: #fce8e6; color: #7a1f1a; }
+.reaction-panel.is-fakeout-amber { background: #fef7e0; color: #7a5b00; }
+.reaction-panel.is-fakeout-text { background: #fce8e6; color: #7a1f1a; }
+.reaction-panel.is-fakeout-lime { background: #e6f4ea; color: #4a6b1a; }
+.reaction-panel.is-go { background: #34a853; color: #fff; }
+.reaction-panel.is-good { background: #ceead6; color: #188038; }
+.reaction-panel.is-fail { background: #202124; color: #fff; }
