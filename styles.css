@@ -239,6 +239,25 @@ body { background: #f5f6f7; color: #202124; }
 .key-green.is-lit { background: #ceead6; box-shadow: inset 0 -5px #188038, 0 0 0 3px #34a85355; }
 .sequence-replay { padding: 7px 9px; border: 1px solid #c5c9ce; background: white; cursor: pointer; }
 .sequence-replay:disabled { color: #9aa0a6; cursor: not-allowed; }
+.retro-game { border: 1px solid #dadce0; background: #17191e; padding: 9px; color: #d7d9d4; }
+.retro-hud, .retro-readout { min-height: 20px; display: flex; justify-content: space-between; align-items: center; gap: 8px; font: 8px var(--mono); }
+.retro-hud span:first-child { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.retro-screen-wrap { position: relative; width: 100%; max-width: 576px; margin: 4px auto 0; overflow: hidden; border: 1px solid #55575a; background: #171b24; }
+.retro-screen { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; image-rendering: pixelated; image-rendering: crisp-edges; cursor: crosshair; }
+.retro-crosshair { position: absolute; inset: 50% auto auto 50%; color: #f0e2b0; font: 13px/1 var(--mono); transform: translate(-50%, -50%); pointer-events: none; text-shadow: 1px 1px #17191e; }
+.retro-screen-flash { position: absolute; inset: 0; pointer-events: none; }
+.retro-controls { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 10px 4px 2px; }
+.retro-move-pad { display: grid; grid-template-columns: repeat(3, 34px); grid-template-rows: repeat(2, 30px); gap: 3px; }
+.retro-move-pad button, .retro-action-pad button { border: 1px solid #696b6e; background: #292c31; color: #e2e4df; font: 12px var(--mono); cursor: pointer; touch-action: manipulation; }
+.retro-move-pad button:first-child { grid-column: 2; }
+.retro-move-pad button:nth-child(2) { grid-column: 1; grid-row: 2; }
+.retro-move-pad button:nth-child(3) { grid-column: 2; grid-row: 2; }
+.retro-move-pad button:nth-child(4) { grid-column: 3; grid-row: 2; }
+.retro-move-pad button:active, .retro-action-pad button:active { background: #52565c; }
+.retro-action-pad { display: flex; gap: 7px; }
+.retro-action-pad button { min-width: 58px; min-height: 38px; padding: 0 9px; font-size: 9px; }
+.retro-action-pad #retro-fire { border-color: #b94b3f; background: #682b2b; }
+.retro-readout { color: #90949a; font-size: 7px; }
 .dino-game { border: 1px solid #dadce0; background: #fafafa; padding: 11px; }
 .dino-hud { min-height: 19px; display: flex; justify-content: space-between; gap: 8px; align-items: center; color: #5f6368; font: 8px var(--mono); }
 .dino-hud span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -299,6 +318,9 @@ body { background: #f5f6f7; color: #202124; }
   .game-layout { grid-template-columns: 1fr; padding: 12px; }
   .sequence-key { min-height: 78px; }
   .dino-track { height: 132px; }
+  .retro-game { padding: 6px; }
+  .retro-move-pad { grid-template-columns: repeat(3, 32px); grid-template-rows: repeat(2, 28px); }
+  .retro-action-pad button { min-width: 52px; }
   .offer-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
   .offer-ribbon, .offer-art, .offer-footer { grid-column: 1 / -1; }
   .offer-panel > .eyebrow, .offer-panel h2, .offer-copy, .buy-button, .demo-disclosure { grid-column: 1 / -1; }
