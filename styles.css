@@ -239,6 +239,20 @@ body { background: #f5f6f7; color: #202124; }
 .key-green.is-lit { background: #ceead6; box-shadow: inset 0 -5px #188038, 0 0 0 3px #34a85355; }
 .sequence-replay { padding: 7px 9px; border: 1px solid #c5c9ce; background: white; cursor: pointer; }
 .sequence-replay:disabled { color: #9aa0a6; cursor: not-allowed; }
+.dino-game { border: 1px solid #dadce0; background: #fafafa; padding: 11px; }
+.dino-hud { min-height: 19px; display: flex; justify-content: space-between; gap: 8px; align-items: center; color: #5f6368; font: 8px var(--mono); }
+.dino-hud span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dino-track { height: 148px; margin-top: 8px; position: relative; overflow: hidden; border: 1px solid #d5d9c8; background: linear-gradient(#edf4fa 0 70%, #f8f7ed 70%); }
+.dino-skyline { position: absolute; inset: auto 0 30px; height: 30px; opacity: .35; background: radial-gradient(ellipse at 12% 100%, #a9c5a5 0 15%, transparent 16%), radial-gradient(ellipse at 70% 100%, #b4cda9 0 18%, transparent 19%); }
+.dino-ground { position: absolute; bottom: 23px; left: 0; right: 0; height: 2px; background: #7d8b72; }
+.dino-sprite { position: absolute; z-index: 2; left: 39px; bottom: 26px; font-size: 32px; line-height: 1; transform-origin: center bottom; filter: grayscale(.6) sepia(.25); }
+.dino-sprite.is-airborne { animation: dino-hop .72s cubic-bezier(.2,.7,.25,1); }
+.dino-obstacle { position: absolute; z-index: 1; bottom: 25px; width: 25px; height: 33px; display: grid; place-items: center; color: #507a48; font-size: 29px; line-height: 1; transform: scaleX(.8); }
+.dino-controls { display: flex; align-items: center; gap: 11px; margin-top: 10px; }
+.dino-jump { min-width: 90px; padding: 8px 11px; border: 1px solid #1a73e8; background: #1a73e8; color: #fff; font: 10px var(--mono); cursor: pointer; }
+.dino-jump:hover { background: #1558b0; }
+.dino-jump:disabled { background: #9aa0a6; border-color: #9aa0a6; cursor: wait; }
+.dino-key-hint { color: #80868b; font: 8px var(--mono); }
 .game-layout { grid-template-columns: minmax(0, 1fr) 210px; gap: 14px; padding: 17px; }
 .game-card { min-height: 0; padding: 0 15px 13px; box-shadow: none; border-color: #dadce0; }
 .card-topline { min-height: 37px; margin: 0 -15px; padding: 0 15px; }
@@ -277,12 +291,14 @@ body { background: #f5f6f7; color: #202124; }
 .restart-button:hover { background: #e8f0fe; }
 
 @keyframes check-in { from { transform: rotate(45deg) scale(.5); } to { transform: rotate(45deg) scale(1); } }
+@keyframes dino-hop { 0% { transform: translateY(0); } 42% { transform: translateY(-53px); } 100% { transform: translateY(0); } }
 
 @media (max-width: 650px) {
   .captcha-main { margin-top: 28px; }
   .challenge-dialog { max-height: calc(100vh - 20px); }
   .game-layout { grid-template-columns: 1fr; padding: 12px; }
   .sequence-key { min-height: 78px; }
+  .dino-track { height: 132px; }
   .offer-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
   .offer-ribbon, .offer-art, .offer-footer { grid-column: 1 / -1; }
   .offer-panel > .eyebrow, .offer-panel h2, .offer-copy, .buy-button, .demo-disclosure { grid-column: 1 / -1; }

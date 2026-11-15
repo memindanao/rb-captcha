@@ -1,6 +1,4 @@
-# Human-ish CAPTCHA
-
-A deliberately frustrating CAPTCHA demo with independently registered, selectable mini-games.
+# 
 
 ## Run
 
