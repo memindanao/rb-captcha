@@ -32,7 +32,8 @@
     const jumpButton = element.querySelector("#dino-jump");
     const speed = 185 + round * 24;
     const jumpDuration = 720;
-    const dinoX = 52;
+    const maxInputDelayMs = 1000;
+    const hitboxInset = 5;
 
     function schedule(callback, delay) {
       const timer = window.setTimeout(() => {
@@ -47,7 +48,7 @@
       inputPending = true;
       jumpButton.disabled = true;
       status.textContent = "JUMP REQUEST RECEIVED. PROCESSING...";
-      const inputDelay = 160 + Math.random() * 840;
+      const inputDelay = Math.min(maxInputDelayMs, 100 + Math.random() * (maxInputDelayMs - 100));
       schedule(() => {
         inputPending = false;
         jumpButton.disabled = false;
@@ -89,15 +90,27 @@
       lastFrame = now;
       if (now >= nextObstacleAt) spawnObstacle(now);
 
+      const dinoBounds = dino.getBoundingClientRect();
+      const dinoHitbox = {
+        left: dinoBounds.left + hitboxInset,
+        right: dinoBounds.right - hitboxInset,
+        top: dinoBounds.top + hitboxInset,
+        bottom: dinoBounds.bottom - hitboxInset
+      };
       for (let index = obstacles.length - 1; index >= 0; index -= 1) {
         const obstacle = obstacles[index];
         obstacle.x -= speed * delta;
         obstacle.element.style.left = `${obstacle.x}px`;
-        if (obstacle.x < dinoX + 40 && obstacle.x + 23 > dinoX + 7) {
+        const obstacleBounds = obstacle.element.getBoundingClientRect();
+        const overlaps = obstacleBounds.left + hitboxInset < dinoHitbox.right &&
+          obstacleBounds.right - hitboxInset > dinoHitbox.left &&
+          obstacleBounds.top + hitboxInset < dinoHitbox.bottom &&
+          obstacleBounds.bottom - hitboxInset > dinoHitbox.top;
+        if (overlaps) {
           handleCollision(now);
           break;
         }
-        if (!obstacle.counted && obstacle.x + 23 < dinoX) {
+        if (!obstacle.counted && obstacleBounds.right < dinoHitbox.left) {
           obstacle.counted = true;
           score += 1;
           scoreDisplay.textContent = `${score} / ${requiredDodges}`;

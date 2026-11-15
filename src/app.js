@@ -93,10 +93,8 @@
       onFail: ({ mistakes: gameMistakes }) => {
         mistakes += 1;
         failureCount.textContent = `${mistakes} ${mistakes === 1 ? "mistake" : "mistakes"}. The system remembers.`;
-        if (gameMistakes === 1) {
-          openOffer("A MINOR SETBACK", "A button got you. Are you sure you don't want to pay? Skip the rest for $0.99.");
-        } else if (mistakes % 2 === 0) {
-          openOffer("QUICK QUESTION", "Are you sure you don't want to pay? You could skip every remaining challenge for $0.99.");
+        if (mistakes % 3 === 0) {
+          openOffer("QUICK QUESTION", "That's three mistakes. Are you sure you don't want to pay? You could skip every remaining challenge for $0.99.");
         }
       }
     });
@@ -117,7 +115,7 @@
       if (challengeDialog.open && !dialog.open) {
         openOffer("STILL THINKING?", "Are you sure you don't want to pay? Skip the remaining challenges for $0.99.");
       }
-    }, 15000);
+    }, 30000);
     updateProgress();
     renderRound();
   }
