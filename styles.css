@@ -126,6 +126,16 @@ h1 em, .offer-panel h2 em, .modal h2 em { color: var(--green); font-style: norma
 .keep-playing { display: block; margin: 13px auto 0; padding: 7px 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 11px; cursor: pointer; }
 .keep-playing:hover { color: var(--ink); border-color: var(--ink); }
 .modal-disclosure { margin: 19px 0 0; color: #85897f; font-size: 8px; text-align: center; }
+.modal.is-quick-question { border: 4px solid #ff00c8; background: #00f5ff; color: #171126; box-shadow: 12px 12px 0 #c6ff00, 0 0 28px #ff00c8; }
+.modal.is-quick-question::backdrop { background: #6a00ffb8; backdrop-filter: blur(3px) saturate(1.7); }
+.modal.is-quick-question .modal-stamp { border: 2px solid #ff00c8; background: #c6ff00; color: #ff00c8; font-weight: 700; }
+.modal.is-quick-question .eyebrow { color: #ff00a8; font-weight: 700; }
+.modal.is-quick-question .modal-copy { color: #171126; font-weight: 700; }
+.modal.is-quick-question .modal-close { color: #ff00a8; font-weight: 700; }
+.modal.is-quick-question .modal-buy { border: 2px solid #171126; background: #c6ff00; color: #ff00a8; box-shadow: 4px 4px 0 #ff00c8; font-weight: 700; }
+.modal.is-quick-question .modal-buy:hover { background: #ff00c8; color: #fff; }
+.modal.is-quick-question .keep-playing { border-color: #ff00a8; color: #171126; font-weight: 700; }
+.modal.is-quick-question .modal-disclosure { color: #39305a; }
 .toast { position: fixed; bottom: 22px; left: 50%; max-width: calc(100vw - 32px); padding: 12px 17px; background: var(--ink); color: white; font: 11px var(--mono); opacity: 0; pointer-events: none; transform: translate(-50%, 10px); transition: opacity .2s, transform .2s; z-index: 5; text-align: center; }
 .toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
 .result-panel { min-height: 270px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 22px 4px; animation: enter-up .35s both; }
@@ -224,6 +234,8 @@ body { background: #f5f6f7; color: #202124; }
 .challenge-prompt div span { margin-top: 3px; color: #e8f0fe; font-size: 11px; }
 .challenge-close { margin-left: auto; width: 30px; height: 30px; border: 1px solid #ffffff88; background: transparent; color: #fff; font: 22px/1 var(--display); cursor: pointer; }
 .challenge-close:hover { background: #ffffff22; }
+.game-picker { min-height: 42px; display: flex; align-items: center; justify-content: flex-end; gap: 9px; padding: 6px 17px; border-bottom: 1px solid #e8eaed; color: #70757a; font: 8px var(--mono); }
+.game-picker select { max-width: min(390px, 76%); min-width: 190px; padding: 6px 27px 6px 8px; border: 1px solid #c5c9ce; border-radius: 2px; background: #fff; color: #3c4043; font: 10px var(--display); }
 .sequence-game { border: 1px solid #dadce0; background: #fafafa; padding: 12px; }
 .sequence-heading, .sequence-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .sequence-status, .sequence-count, .sequence-progress, .sequence-replay { font: 9px var(--mono); color: #5f6368; }
@@ -264,9 +276,18 @@ body { background: #f5f6f7; color: #202124; }
 .dino-track { height: 148px; margin-top: 8px; position: relative; overflow: hidden; border: 1px solid #d5d9c8; background: linear-gradient(#edf4fa 0 70%, #f8f7ed 70%); }
 .dino-skyline { position: absolute; inset: auto 0 30px; height: 30px; opacity: .35; background: radial-gradient(ellipse at 12% 100%, #a9c5a5 0 15%, transparent 16%), radial-gradient(ellipse at 70% 100%, #b4cda9 0 18%, transparent 19%); }
 .dino-ground { position: absolute; bottom: 23px; left: 0; right: 0; height: 2px; background: #7d8b72; }
-.dino-sprite { position: absolute; z-index: 2; left: 39px; bottom: 26px; font-size: 32px; line-height: 1; transform: scaleX(-1); transform-origin: center bottom; filter: grayscale(.6) sepia(.25); }
-.dino-sprite.is-airborne { animation: dino-hop .72s cubic-bezier(.2,.7,.25,1); }
-.dino-obstacle { position: absolute; z-index: 1; bottom: 25px; width: 25px; height: 33px; display: grid; place-items: center; color: #507a48; font-size: 29px; line-height: 1; transform: scaleX(.8); }
+.dino-sprite { position: absolute; z-index: 2; left: 39px; bottom: 26px; width: 34px; height: 45px; transform-origin: center bottom; }
+.dino-sprite.is-airborne { animation: lebron-hop .72s cubic-bezier(.2,.7,.25,1); }
+.lebron-head { position: absolute; z-index: 2; top: 0; left: 11px; width: 14px; height: 14px; background: #8d5437; border: 2px solid #25242a; border-radius: 2px; }
+.lebron-head::after { content: ""; position: absolute; top: -3px; left: 0; width: 10px; height: 4px; background: #17191e; }
+.lebron-body { position: absolute; top: 13px; left: 6px; width: 24px; height: 20px; display: grid; place-items: center; background: #7b2333; border: 2px solid #24242a; color: #f5e5bb; font: 8px var(--mono); }
+.lebron-body::before, .lebron-body::after { content: ""; position: absolute; top: 2px; width: 5px; height: 12px; background: #8d5437; border: 1px solid #24242a; }
+.lebron-body::before { left: -7px; }
+.lebron-body::after { right: -7px; }
+.lebron-leg { position: absolute; top: 31px; width: 8px; height: 13px; background: #e8e4d8; border: 2px solid #24242a; }
+.lebron-leg-front { left: 8px; }
+.lebron-leg-back { left: 20px; }
+.lebron-defender { position: absolute; z-index: 1; bottom: 25px; width: 25px; height: 30px; display: grid; place-items: center; font-size: 24px; line-height: 1; }
 .dino-controls { display: flex; align-items: center; gap: 11px; margin-top: 10px; }
 .dino-jump { min-width: 90px; padding: 8px 11px; border: 1px solid #1a73e8; background: #1a73e8; color: #fff; font: 10px var(--mono); cursor: pointer; }
 .dino-jump:hover { background: #1558b0; }
@@ -310,12 +331,14 @@ body { background: #f5f6f7; color: #202124; }
 .restart-button:hover { background: #e8f0fe; }
 
 @keyframes check-in { from { transform: rotate(45deg) scale(.5); } to { transform: rotate(45deg) scale(1); } }
-@keyframes dino-hop { 0% { transform: scaleX(-1) translateY(0); } 42% { transform: scaleX(-1) translateY(-53px); } 100% { transform: scaleX(-1) translateY(0); } }
+@keyframes lebron-hop { 0% { transform: translateY(0); } 42% { transform: translateY(-53px); } 100% { transform: translateY(0); } }
 
 @media (max-width: 650px) {
   .captcha-main { margin-top: 28px; }
   .challenge-dialog { max-height: calc(100vh - 20px); }
   .game-layout { grid-template-columns: 1fr; padding: 12px; }
+  .game-picker { justify-content: space-between; }
+  .game-picker select { min-width: 0; max-width: 78%; }
   .sequence-key { min-height: 78px; }
   .dino-track { height: 132px; }
   .retro-game { padding: 6px; }

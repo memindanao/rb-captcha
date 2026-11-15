@@ -3,6 +3,7 @@
   const games = window.CaptchaGames.list();
   const host = document.querySelector("#game-host");
   const challengeDialog = document.querySelector("#challenge-dialog");
+  const gameSelector = document.querySelector("#game-selector");
   const captchaToggle = document.querySelector("#captcha-toggle");
   const checkboxLabel = document.querySelector(".checkbox-label");
   const verificationStatus = document.querySelector("#verification-status");
@@ -12,6 +13,7 @@
   let mistakes = 0;
   let activeGame = null;
   let previousGameId = "";
+  let selectedGameId = "";
   let cleanupGame = null;
   let toastTimer;
   let nagTimer;
@@ -74,10 +76,14 @@
 
   function renderRound() {
     if (cleanupGame) cleanupGame();
-    const availableGames = games.length > 1
-      ? games.filter((game) => game.id !== previousGameId)
-      : games;
-    activeGame = availableGames[Math.floor(Math.random() * availableGames.length)];
+    if (selectedGameId) {
+      activeGame = games.find((game) => game.id === selectedGameId) || games[0];
+    } else {
+      const availableGames = games.length > 1
+        ? games.filter((game) => game.id !== previousGameId)
+        : games;
+      activeGame = availableGames[Math.floor(Math.random() * availableGames.length)];
+    }
     previousGameId = activeGame.id;
     title.textContent = activeGame.title;
     description.textContent = activeGame.description;
@@ -120,9 +126,16 @@
 
   function openOffer(eyebrow, copy) {
     activeOfferIsPayment = eyebrow !== "A FAIR QUESTION";
+    dialog.classList.toggle("is-quick-question", eyebrow === "QUICK QUESTION");
     document.querySelector("#dialog-eyebrow").textContent = eyebrow;
     document.querySelector("#dialog-copy").textContent = copy;
     if (!dialog.open) dialog.showModal();
+  }
+
+  function populateGameSelector() {
+    games.forEach((game) => {
+      gameSelector.add(new Option(`${game.title} (${game.type})`, game.id));
+    });
   }
 
   function dismissOffer() {
@@ -173,10 +186,15 @@
   captchaToggle.addEventListener("click", () => {
     if (!captchaToggle.classList.contains("is-verified")) startRun();
   });
+  gameSelector.addEventListener("change", () => {
+    selectedGameId = gameSelector.value;
+    if (challengeDialog.open && games.length) renderRound();
+  });
   dialog.addEventListener("close", () => {
     const shouldReopen = dismissedPaymentOffer && activeOfferIsPayment;
     dismissedPaymentOffer = false;
     activeOfferIsPayment = false;
+    dialog.classList.remove("is-quick-question");
     document.querySelector("#confirm-buy").hidden = false;
     document.querySelector("#confirm-buy").disabled = false;
     document.querySelector("#confirm-buy").innerHTML = "<span>PAY &amp; SKIP</span><span>$0.99 ↗</span>";
@@ -197,6 +215,7 @@
     host.textContent = "No games are registered yet.";
     return;
   }
+  populateGameSelector();
   async function verifyCheckoutReturn() {
     const query = new URLSearchParams(window.location.search);
     const sessionId = query.get("session_id");
